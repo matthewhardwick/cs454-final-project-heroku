@@ -1,0 +1,36 @@
+
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+<div class="lattice-container">
+{% for item in viewModel %}
+    {% if loop.index0 != 0 %}
+    	<div class="existential-column invalid" data-e-col="{{ loop.index0 }}">
+            <div class="existential-edge-0" data-e-edge="{{ item[0] }}"></div>
+    		<div class="existential-edge-1" data-e-edge="{{ item[1] }}"></div>
+    		<div class="existential-edge-2" data-e-edge="{{ item[2] }}"></div>
+    		<div class="existential-edge-3" data-e-edge="{{ item[3] }}"></div>
+    		<div class="existential-edge-4" data-e-edge="{{ item[4] }}"></div>
+    	</div>
+    {% else %}
+        <div class="existential-edge-5 lead-item" data-e-edge="{{ item[1] }}"></div>
+        <div class="existential-edge-6 lead-item" data-e-edge="{{ item[3] }}"></div>
+    {% endif %}
+{% endfor %}
+</div>
+
+{{ filename }}
+<script>
+
+// Move the Starting State to the first Existential Column
+$($('[data-e-col=1]')).append($('.lead-item'));
+
+// Show a the next E Column after 1 second until all are shown
+var latticeContainer = $($(".lattice-container")[0]);
+if (!!latticeContainer) {
+    $.each(latticeContainer.children(), function(index, value) {
+        setTimeout(function() {
+            $(value).addClass("current");
+        }, 1000 * index);
+    });
+}
+
+</script>
