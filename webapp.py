@@ -24,6 +24,8 @@ def index():
 			files['pass_files'].append({ 'filename' :item, 'id': match.group(2) })
 		elif match and match.group(1) == 'fail':
 			files['fail_files'].append({ 'filename' :item, 'id': match.group(2) }) 
+	files['pass_files'].sort()
+	files['fail_files'].sort() 
 	return render_template('index.html', viewModel=files)
 
 
