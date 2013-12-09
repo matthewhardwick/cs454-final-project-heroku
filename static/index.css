@@ -34,8 +34,19 @@ table, th, td {
     margin: 3px;
 }
 
+.header h1 {
+	background-color: #C2C2C2;
+	border-bottom: 2px solid black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin-left: 0px;
+	margin-right: 0px;
+
+}
+
 .header {
-	margin-bottom: 15px; 
+	background-color: #F0F0F0;
+	padding-bottom: 15px; 
 }
 
 .valid-states-text {
@@ -186,10 +197,10 @@ th {
 	border-color: red;
 }
 
-.main-container {
+.main-content {
 	margin-left: 50px;
 	margin-right: 50px;
-	margin-top: 50px;
+	margin-top: 15px;
 }
 
 .hide {
@@ -219,7 +230,7 @@ th {
 	margin-top: 0;
 }
 
-.navigation-left h2 {
+.navigation-left h2, .navigation-left h3 {
 	margin-bottom: 5px;
 	background-color: #C2C2C2;
 	border-bottom: 2px solid black;

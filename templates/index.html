@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <head>
-	<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <html>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
 <div class="main-container">
 	<div class="header">
 		<h1>Self-Avoiding Walks in a 3xN Lattice</h1>
@@ -13,12 +12,25 @@
 	</div>
 
 	<div class="navigation-left">
-		{% for file_list in viewModel|reverse %}
-			<h2>{{ file_list|capitalize }} Inputs</h2>
-			{% for file in viewModel[file_list] %}
-				<a href="example/{{ file_list }}/{{ file['id'] }}">{{file['filename']}}</a><br />
+		<div>
+			<h2>Navigation</h2>
+			<a href="/">Home</a>
+		</div>
+		<div>
+			<h3>Resources</h3>
+			<a href="https://github.com/matthewhardwick/self-avoding-walks">Research Repository</a><br />
+			<a href="https://github.com/matthewhardwick/cs454-final-project-heroku">Demo Repository</a><br />
+		</div>
+		<div class="input-select">
+			{% for file_list in viewModel|reverse %}
+				<div>
+					<h3>{{ file_list|capitalize }} Inputs</h3>
+					{% for file in viewModel[file_list] %}
+						<a href="example/{{ file_list }}/{{ file['id'] }}">{{file['filename']}}</a><br />
+					{% endfor %}
+				</div>
 			{% endfor %}
-		{% endfor %}
+		</div>
 	</div>
 	<div id="container" class="main-content">
 		<div class="index-message">
@@ -31,7 +43,7 @@
 </div>
 
 <script>
-	$('a').click(function () {
+	$('.input-select a').click(function () {
 		$('#container').load($(this).attr('href'));
 		return false;
 	});
