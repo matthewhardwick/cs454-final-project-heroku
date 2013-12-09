@@ -5,7 +5,6 @@ from delta import *
 from dfa import makeDFA
 
 app = Flask(__name__)
-app.debug = True
 example_types = ['pass', 'fail']
 
 @app.route('/example/<example_type>/<example_id>')
