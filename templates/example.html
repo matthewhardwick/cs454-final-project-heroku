@@ -1,34 +1,208 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
-<div class="lattice-container">
-{% for item in viewModel %}
-    {% if loop.index0 != 0 %}
-    	<div class="existential-column invalid" data-e-col="{{ loop.index0 }}">
-            <div class="existential-edge-0" data-e-edge="{{ item[0] }}"></div>
-    		<div class="existential-edge-1" data-e-edge="{{ item[1] }}"></div>
-    		<div class="existential-edge-2" data-e-edge="{{ item[2] }}"></div>
-    		<div class="existential-edge-3" data-e-edge="{{ item[3] }}"></div>
-    		<div class="existential-edge-4" data-e-edge="{{ item[4] }}"></div>
-    	</div>
-    {% else %}
-        <div class="existential-edge-5 lead-item" data-e-edge="{{ item[1] }}"></div>
-        <div class="existential-edge-6 lead-item" data-e-edge="{{ item[3] }}"></div>
-    {% endif %}
-{% endfor %}
-</div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-{{ filename }}
+
+<div class="lattice-container">
+    <div class="lattice">
+    {% for item in viewModel.states %}
+        {% if loop.index != 1 %}
+        	<div class="existential-column" data-e-col="{{ loop.index-1 }}">
+                <div class="existential-edge-0" data-e-edge="{{ item[0] }}"></div>
+        		<div class="existential-edge-1" data-e-edge="{{ item[1] }}"></div>
+        		<div class="existential-edge-2" data-e-edge="{{ item[2] }}"></div>
+        		<div class="existential-edge-3" data-e-edge="{{ item[3] }}"></div>
+        		<div class="existential-edge-4" data-e-edge="{{ item[4] }}"></div>
+        	</div>
+        {% else %}
+            <div class="existential-edge-5 lead-item" data-e-edge="{{ item[1] }}"></div>
+            <div class="existential-edge-6 lead-item" data-e-edge="{{ item[3] }}"></div>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <div class="lattice-detail">
+        <div class="lattice-detail-states">
+            <h3 class="valid-states-text">Input Symbols and State Transitions</h2>
+            <table class="state-table">
+               <colgroup>
+                   <col span="1" style="width: 75px;">
+                   <col span="1" align="center">
+                   <col span="1" align="center">
+                   <col span="1" align="center">
+                </colgroup>
+                <tr>
+                    <th>#</th>
+                    <th>Start State</th>
+                    <th>Input</th>
+                    <th>Finish State</th>
+                </tr>
+            </table>
+        </div>
+        <div class="lattice-detail-pos-states">
+            <h3 class="valid-states-text">Valid States</h2>
+            <div class="state-types">
+                <table class="single-ended">
+                    <tr>
+                        <th colspan="2">Single Ended</th>
+                    </tr>
+                    <tr>
+                        <th>State</th>
+                        <th>Acc</th>
+                    </tr>
+                    <tr>
+                        <td>1000</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>1200</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>1220</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>0100</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>2100</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>0120</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>0010</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>0210</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                    <tr>
+                        <td>2210</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                </table>
+
+                <table class="double-ended">
+                    <tr>
+                        <th colspan="2">Double Ended</th>
+                    </tr>
+                    <tr>
+                        <th>State</th>
+                        <th>Acc</th>
+                    </tr>
+                    <tr>
+                        <td>1010</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1210</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1100</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1120</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>0110</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2110</td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <table class="triple-ended">
+                    <tr>
+                        <th colspan="2">Triple Ended</th>
+                    </tr>
+                    <tr>
+                        <th>State</th>
+                        <th>Acc</th>
+                    </tr>
+                    <tr>
+                        <td>1111</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1112</td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <table class="aux-ended">
+                    <tr>
+                        <th colspan="2">Auxilary Ended</th>
+                    </tr>
+                    <tr>
+                        <th>State</th>
+                        <th>Acc</th>
+                    </tr>
+                    <tr>
+                        <td>start</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>dead</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>done</td>
+                        <td class="accepted-state">*</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+
+var state_info = {{ viewModel.state_info|tojson|safe }};
 
 // Move the Starting State to the first Existential Column
 $($('[data-e-col=1]')).append($('.lead-item'));
 
 // Show a the next E Column after 1 second until all are shown
-var latticeContainer = $($(".lattice-container")[0]);
+var latticeContainer = $($(".lattice")[0]);
+var table = $($(".state-table")[0]);
 if (!!latticeContainer) {
     $.each(latticeContainer.children(), function(index, value) {
         setTimeout(function() {
             $(value).addClass("current");
+
+            if (index === 0 && !!state_info[0])
+                table.append("<tr data-end-state='" + state_info[index]['end'] + "'>" +
+                    "<td>" + (index) + "</td>" + 
+                    "<td>" + state_info[index]['start'] + "</td>" +
+                    "<td>" + state_info[index]['symbol'] + "</td>" +
+                    "<td>" + state_info[index]['end'] + "</td>" +
+                    "</tr>");
+
+
+            if (!!state_info[index+1]) {
+                table.append("<tr data-end-state='" + state_info[index+1]['end'] + "'>" +
+                    "<td>" + (index+1) + "</td>" + 
+                    "<td>" + state_info[index+1]['start'] + "</td>" +
+                    "<td>" + state_info[index+1]['symbol'] + "</td>" +
+                    "<td>" + state_info[index+1]['end'] + "</td>" +
+                    "</tr>");
+                if (state_info[index+1].end !== "dead")
+                    $(value).addClass('valid');
+                else
+                    $(value).addClass("invalid");
+
+            }
+
         }, 1000 * index);
     });
 }

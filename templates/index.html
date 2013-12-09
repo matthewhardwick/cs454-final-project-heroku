@@ -6,59 +6,34 @@
 <html>
 
 <div class="main-container">
-<div class="row">
+	<div class="header">
+		<h1>Self-Avoiding Walks in a 3xN Lattice</h1>
+		<h3>Sean Robbins, Jacob Combs, and Matthew Hardwick</h3>
+		<h4>Sonoma State University, CS 454: Theory of Computation, Dr. B. Ravikumar</h4>
+	</div>
+
 	<div class="navigation-left">
-	<h2>Good Inputs</h2>
-	{% for file in viewModel['pass'] %}
-		<a href="example/pass/{{ file['id'] }}">{{file['filename']}}</a><br />
-	{% endfor %}
-	<br />
-	<h2>Bad Inputs</h2>
-	{% for file in viewModel['fail'] %}
-		<a href="example/fail/{{ file['id'] }}">{{file['filename']}}</a><br />
-	{% endfor %}
+		{% for file_list in viewModel|reverse %}
+			<h2>{{ file_list|capitalize }} Inputs</h2>
+			{% for file in viewModel[file_list] %}
+				<a href="example/{{ file_list }}/{{ file['id'] }}">{{file['filename']}}</a><br />
+			{% endfor %}
+		{% endfor %}
 	</div>
 	<div id="container" class="main-content">
-		<div class="windows8 hide">
-			<div class="wBall" id="wBall_1">
-				<div class="wInnerBall">
-				</div>
-			</div>
-			<div class="wBall" id="wBall_2">
-				<div class="wInnerBall">
-				</div>
-			</div>
-			<div class="wBall" id="wBall_3">
-				<div class="wInnerBall">
-				</div>
-			</div>
-			<div class="wBall" id="wBall_4">
-				<div class="wInnerBall">
-				</div>
-			</div>
-			<div class="wBall" id="wBall_5">
-				<div class="wInnerBall">
-				</div>
+		<div class="index-message">
+			<div>
+			<h3>Click an input on the left to see an animation for the given test input.</h3>
+			<h4>Prior to the animation, the given input is processed by agorithm defined in our report.</h4>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 <script>
 	$('a').click(function () {
 		$('#container').load($(this).attr('href'));
 		return false;
-	});
-
-	$('#get_sample').click(function (evt) {
-		$('.lattice-container').remove()
-		$('.windows8').removeClass("hide");
-		$.get("example/pass/1", function (data) {
-			$('.windows8').addClass("hide");
-			$("#container").append(data);
-			console.log("load performed");
-		})
 	});
 </script>
 </html>

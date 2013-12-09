@@ -12,7 +12,14 @@ example_types = ['pass', 'fail']
 def example_pass(example_type, example_id):
 	if example_type in example_types:
 		infile = get_infile(example_type, example_id)
-		return render_template('example.html', viewModel=infile)
+		state_info = []
+		state = 'start'
+		for i in infile:
+			current_state_info = { 'start': state, 'symbol': i }
+			state = delta(state, i)
+			current_state_info['end'] = state
+			state_info.append(current_state_info)
+		return render_template('example.html', viewModel={ 'states': infile, 'state_info': state_info })
 
 
 @app.route('/')
@@ -26,18 +33,6 @@ def index():
 	for s in files.keys():
 		files[s].sort()
 	return render_template('index.html', viewModel=files)
-
-@app.route('/debug')
-def debug():
-	dfa = makeDFA()
-	infile = get_infile('pass', '1')
-	output = ""
-	state = 'start'
-	for i in infile:
-		output += state + ' => ' + i + ' => '
-		state = delta(state, i)
-		output += state + '<br />'
-	return output
 
 
 def get_infile(input_type, example_id):
