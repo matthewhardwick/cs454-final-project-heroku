@@ -9,12 +9,12 @@
 <div class="row">
 	<div class="navigation-left">
 	<h2>Good Inputs</h2>
-	{% for file in viewModel['pass_files'] %}
+	{% for file in viewModel['pass'] %}
 		<a href="example/pass/{{ file['id'] }}">{{file['filename']}}</a><br />
 	{% endfor %}
 	<br />
 	<h2>Bad Inputs</h2>
-	{% for file in viewModel['fail_files'] %}
+	{% for file in viewModel['fail'] %}
 		<a href="example/fail/{{ file['id'] }}">{{file['filename']}}</a><br />
 	{% endfor %}
 	</div>
